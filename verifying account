@@ -1,0 +1,35 @@
+#include <iostream>
+#include <map>
+#include <cstdlib> // for rand() and srand()
+#include <ctime>   // for time()
+
+int main() {
+    std::map<int, int> idToUnlockCode; // Store ID-to-UnlockCode pairs
+
+    // Seed the random number generator
+    srand(static_cast<unsigned>(time(nullptr)));
+
+    // Generate an ID code (you can replace this with your own logic)
+    int idCode = 1234567;
+    std::cout << "ID: " << idCode << std::endl;
+
+    // Generate an unlock code
+    int unlockCode = rand() % 900000 + 100000; // Generate a 6-digit code
+    idToUnlockCode[idCode] = unlockCode;
+    std::cout << "Unlock Code: " << unlockCode << std::endl;
+
+    // Back in Program 1, user enters the unlock code
+    int enteredUnlockCode;
+    std::cout << "Enter Unlock Code: ";
+    std::cin >> enteredUnlockCode;
+
+    // Verify the entered unlock code
+    if (idToUnlockCode[idCode] == enteredUnlockCode) {
+        std::cout << "Code accepted. Now doing other stuff..." << std::endl;
+        // Perform other actions here
+    } else {
+        std::cout << "Invalid unlock code. Access denied." << std::endl;
+    }
+
+    return 0;
+}
